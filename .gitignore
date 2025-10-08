@@ -1,0 +1,42 @@
+﻿# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pkl
+*.log
+*.sqlite3
+.env
+.venv/
+env/
+venv/
+*.egg-info/
+dist/
+build/
+
+# Jupyter
+.ipynb_checkpoints
+
+# IDEs
+.vscode/
+.idea/
+
+# System
+.DS_Store
+Thumbs.db
+
+# Large files
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.mp4
+*.mp3
+*.mov
+*.avi
+*.mkv
+*.7z
+
+# Python virtual environments
+*.egg
+*.whl
