@@ -56,40 +56,40 @@ Thumbs.db
 "@
 
 $gitignoreContent | Out-File -Encoding UTF8 -FilePath $gitignorePath
-Write-Host ".gitignore создан ✅"
+Write-Host ".gitignore created successfully"
 
-# --- Инициализация Git, если ещё не инициализирован ---
+# --- Initialize Git if not already initialized ---
 if (-not (Test-Path "$localPath\.git")) {
     git init
-    Write-Host "Git репозиторий инициализирован ✅"
+    Write-Host "Git repository initialized"
 }
 
-# --- Запрос данных GitHub ---
-$githubUser = Read-Host "Введите ваш GitHub username"
-$repoName = Read-Host "Введите имя репозитория на GitHub (например GPUOptimizedAvatar)"
-$pat = Read-Host "Введите Personal Access Token (PAT)" -AsSecureString
+# --- Request GitHub credentials ---
+$githubUser = Read-Host "Enter your GitHub username"
+$repoName = Read-Host "Enter repository name (e.g. GPUOptimizedAvatar)"
+$pat = Read-Host "Enter your Personal Access Token (PAT)" -AsSecureString
 $ptr = [Runtime.InteropServices.Marshal]::PtrToStringAuto([Runtime.InteropServices.Marshal]::SecureStringToBSTR($pat))
 
-# --- Настройка origin ---
+# --- Setup origin ---
 if (git remote get-url origin 2>$null) {
     git remote remove origin
-    Write-Host "Старый origin удалён."
+    Write-Host "Old origin removed"
 }
 
-# ИСПРАВЛЕНО: Используем фигурные скобки для переменных
+# Fixed: Using curly braces for variables
 $remoteUrl = "https://${githubUser}:${ptr}@github.com/${githubUser}/${repoName}.git"
 git remote add origin $remoteUrl
-Write-Host "Новый origin добавлен ✅"
+Write-Host "New origin added successfully"
 
-# --- Добавляем файлы и коммит ---
+# --- Add files and commit ---
 git add .
 git commit -m "Initial commit with .gitignore"
 
-# --- Устанавливаем ветку main и пуш ---
+# --- Set main branch and push ---
 git branch -M main
-Write-Host "Ветка main установлена."
+Write-Host "Main branch set"
 
-Write-Host "Пушим на GitHub..."
+Write-Host "Pushing to GitHub..."
 git push -u origin main
 
-Write-Host "✅ Все действия выполнены. Репозиторий готов на GitHub!"
+Write-Host "Done! Repository is ready on GitHub!"
